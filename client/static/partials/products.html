@@ -1,0 +1,22 @@
+<div ng-controller = 'productsController'>
+	<form>
+		<input type='text' ng-model='filter_name' placeholder='search name...'>
+		<input type='submit' value='Filter'>
+	</form>
+	<h2>Add a new Product!</h2>
+	<form ng-submit='addProduct()'>
+		Name:<input type="text" placeholder="name" ng-model='new_product.name'></input>
+		Image(url):<input type="text" placeholder="http://" ng-model='new_product.img'></input>
+		Description:<textarea rows="5" cols="20" ng-model='new_product.description'></textarea>
+		Initial Quantity:	<select ng-model='new_product.quantity'>
+								<option ng-repeat='i in quantity' value="{{i}}">{{i}}</option>
+							</select>
+		<input type="submit" value="Create"></input>
+	</form>
+	<div id="products" ng-repeat='product in products | filter: filter_name track by $index'>
+		<img ng-src="{{product.img}}" width="100px">
+		<p>{{product.name}}</p>
+		<p>({{product.quantity}} left)</p>
+	</div>
+		<a href="#/products">Show more...</a>
+</div>
